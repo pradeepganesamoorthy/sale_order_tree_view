@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_sale_order_test"
+            string="Test Quotation"
+            model="sale.order"
+            report_type="qweb-pdf"
+            file="sale_order_view.report_test_saleorder"
+            name="sale_order_view.report_test_saleorder"
+        />
+    </data>
+</odoo>

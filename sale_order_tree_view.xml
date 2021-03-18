@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="sale_order_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">sale.order.view.tree</field>-->
+<!--            <field name="model">sale.order.tree.view</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Sale order tree view">-->
+<!--                   <header>-->
+<!--                        <button name="sale_order_tree_view" type="object" string="View Sale order" class="oe_highlight"/>-->
+<!--                    </header>-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="product_id"/>-->
+<!--                            <field name="default_code"/>-->
+<!--                            <field name="order_qty"/>-->
+<!--                            <field name="unit_prz"/>-->
+<!--                            <field name="over_all_sale"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--         <record id="sale_order_view_tree_inhri" model="ir.ui.view">-->
+<!--            <field name="name">sale.order.view.tree</field>-->
+<!--            <field name="model">sale.order.tree.view</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Fields">-->
+<!--                     <field name="product_id"/>-->
+<!--                            <field name="default_code"/>-->
+<!--                            <field name="order_qty"/>-->
+<!--                            <field name="unit_prz"/>-->
+<!--                            <field name="over_all_sale"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+          <record id="sale_order_tree_inherited" model="ir.ui.view">
+            <field name="name">sale.order.line</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Tree View">
+                    <field name="order_id"/>
+                     <field name="product_id"/>
+                     <field name="product_uom_qty"/>
+                     <field name="price_unit"/>
+                     <field name="price_subtotal"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="sale_order_form_inherited" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form string="Tree View">
+                    <sheet>
+                        <group>
+                             <field name="order_id"/>
+                             <field name="product_id"/>
+                             <field name="product_uom_qty"/>
+                             <field name="price_unit"/>
+                             <field name="price_subtotal"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+<!--        <record model="ir.actions.act_window" id="sale_order_tree_view_action">-->
+<!--            <field name="name">Sale order View</field>-->
+<!--            <field name="res_model">sale.order.line</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+
+         <record model="ir.actions.act_window" id="sale_order_view_new">
+            <field name="name">Sale order View New</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+             <field name="view_id" eval="False"/>
+             <field name="priority" eval="15"/>
+             <field name="domain">[]</field>
+             <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id':ref('sale_order_tree_inherited')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_form_inherited')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+        </record>
+
+
+<menuitem id="sale_order_tree_view_id" name="Sale order tree View"/>
+<!--<menuitem id="sot_view" name="Sale order" parent="sale_order_tree_view_id" action="sale_order_tree_view_action"/>-->
+<menuitem id="sol_view" name="Sale Line order" parent="sale_order_tree_view_id" action="sale_order_view_new"/>
+
+
+    </data>
+</odoo>
